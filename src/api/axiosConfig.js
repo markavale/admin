@@ -23,8 +23,6 @@ const getAPI = axios.create({
     baseURL: APIUrl
 })
 
-
-
 // getAPI.interceptors.response.use(undefined, function (err) {
 //   // if error response status is 401, it means the request was invalid due to expired access token
 //   if (err.config && err.response && err.response.status === 401) {
