@@ -26,6 +26,16 @@ const routes = [{
 
     },
     {
+        path: '/messages',
+        name: 'messages',
+        component: () =>
+            import ( /* webpackChunkName: "messages" */ '../views/portfolio/Messages.vue'),
+        meta: {
+            requiresAuth: true
+        }
+
+    },
+    {
         path: '/login',
         name: 'login',
         component: Login,

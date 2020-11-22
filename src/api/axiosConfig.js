@@ -15,14 +15,22 @@ const axiosBase = axios.create({
     baseURL: APIUrl,
     headers: {
         'Content-Type': 'application/json',
-        'X-CSRFToken': Cookies.get('csrftoken')
-            //'Authentication': `Token ${localStorage.getItem('token')}`
+        'X-CSRFToken': Cookies.get('csrftoken'),
+        // 'Authentication': `Token ${localStorage.getItem('token')}`
     }
 })
+
+const token_data = localStorage.getItem('token') || null
 const getAPI = axios.create({
-    baseURL: APIUrl
+    baseURL: APIUrl,
+    headers: {
+        'Content-Type': 'application/json',
+        // 'X-CSRFToken': Cookies.get('csrftoken')
+        'Authentication': `Token ${token_data}`
+    }
 })
 
+// const axiosGet = axios.get()
 // getAPI.interceptors.response.use(undefined, function (err) {
 //   // if error response status is 401, it means the request was invalid due to expired access token
 //   if (err.config && err.response && err.response.status === 401) {

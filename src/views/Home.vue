@@ -10,7 +10,6 @@
         </div>
       </template>
     </Sidebar> -->
-    
   </div>
 </template>
 

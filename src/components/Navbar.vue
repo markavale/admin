@@ -25,6 +25,11 @@
               >About</router-link
             >
           </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'messages' }" class="nav-link"
+              >Messages</router-link
+            >
+          </li>
         </ul>
         <!-- <span class="navbar-text"> Navbar text with an inline element </span> -->
         <ul class="navbar-nav">
