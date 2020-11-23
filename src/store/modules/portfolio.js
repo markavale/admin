@@ -1,4 +1,6 @@
-import { getAPI } from "@/api/axiosConfig"; //axiosBase
+// import { getAPI } from "@/api/axiosConfig"; //axiosBase
+import {  getAPI } from "@/api/axiosConfig";//axiosBase
+
 // import router from "@/router";
 const state = {
     pageViews: 0,
@@ -31,7 +33,12 @@ const actions = {
     fetchMessages: (context) => {
         return new Promise((resolve, reject) => {
             getAPI
-                .get('api/messages/')
+              .get("api/messages/", {
+                headers: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                  Authorization: `Token ${localStorage.getItem("token")}`,
+                },
+              })
                 .then((res) => {
                     console.log(res.data)
                     resolve(true)

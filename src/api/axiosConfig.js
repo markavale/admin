@@ -20,13 +20,13 @@ const axiosBase = axios.create({
     }
 })
 
-const token_data = localStorage.getItem('token') || null
+// const token_data = localStorage.getItem('token') || null
 const getAPI = axios.create({
     baseURL: APIUrl,
     headers: {
         'Content-Type': 'application/json',
         // 'X-CSRFToken': Cookies.get('csrftoken')
-        'Authentication': `Token ${token_data}`
+        // 'Authentication': `Token ${token_data}`
     }
 })
 

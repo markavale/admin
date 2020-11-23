@@ -54,10 +54,13 @@
 
             <v-divider v-if="index + 1 < items.length" :key="index"></v-divider>
           </template>
-          <!-- <div>
+          <div>
           <li v-for="message in getMessages" :key="message.id">
-            {{ message.name }}
-            </li></div> -->
+            Name: {{ message.name }} |
+            Subject: {{ message.subject }}|
+            Email: {{ message.email }} |  
+            Message: {{ message.message }}|
+            </li></div>
         </v-list-item-group>
       </v-list>
     </v-card>
@@ -66,8 +69,8 @@
 
 <script>
 import Navbar from "@/components/Navbar";
-import { getAPI } from "@/api/axiosConfig"; //axiosBase
-// import { mapGetters } from "vuex"
+// import { getAPI } from "@/api/axiosConfig"; //axiosBase
+import { mapGetters } from "vuex"
 export default {
   data: () => ({
     selected: [2],
@@ -80,8 +83,8 @@ export default {
           "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
       },
     ],
-    messages: [],
     errors: [],
+    token: null
   }),
   components: {
     Navbar,
@@ -90,51 +93,27 @@ export default {
     this.fetchingMessages();
     console.log("messages mounted");
   },
-  computed: {},
+  computed: {
+  ...mapGetters(["getMessages"]),    
+  },
   methods: {
     fetchingMessages() {
       // let token = localStorage.getItem('token')
-      getAPI
-        .get("api/messages/")
-        .then((res) => {
-          console.log(res.data);
+      console.log(this.token)
+      this.$store.dispatch('fetchMessages')
+        .then(() => {
+          // console.log(res.data);
+          console.log("success")
         })
         .catch((error) => {
           console.error(error);
+          let error_data = error.response.data
+          console.log(error_data)
+          for(const field_error in error_data){
+            this.errors.push(error_data[field_error][0])
+          }
         });
-      // getAPI
-      // .get('api/messages/')
-      // .then(res =>{
-      //   console.log(res.data)
-      // })
-      // .catch(err => {
-      //   console.log(err)
-      //   let error_data = err.response.data;
-      //   console.log(error_data);
-      //   for (const field_error in error_data) {
-      //     this.errors.push(error_data[field_error][0]);
-      //   }
-      //   this.error = true;
-      // })
     },
-    // fetchingMessages(){
-    //   this.$store.dispatch('fetchMessages')
-    //   .then(res => {
-    //     this.messages = res.data
-    //     console.log(this.messages)
-
-    //     console.log("HEYHEY")
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //     let error_data = err.response.data;
-    //     console.log(error_data);
-    //     for (const field_error in error_data) {
-    //       this.errors.push(error_data[field_error][0]);
-    //     }
-    //     this.error = true;
-    //   })
-    // },
   },
 };
 </script>
