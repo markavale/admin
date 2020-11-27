@@ -24,24 +24,24 @@
           multiple
           active-class="pink--text"
         >
-          <template v-for="(item, index) in items">
-            <v-list-item :key="item.title">
+          <template >
+            <v-list-item v-for="messages in getMessages" :key="messages.id">
               <template v-slot:default="{ active }">
                 <!-- toggle -->
                 <v-list-item-content>
-                  <v-list-item-title v-text="item.title"></v-list-item-title>
+                  <v-list-item-title v-text="messages.name"></v-list-item-title>
                   <v-list-item-subtitle
                     class="text--primary"
-                    v-text="item.headline"
+                    v-text="messages.subject"
                   ></v-list-item-subtitle>
                   <v-list-item-subtitle
-                    v-text="item.subtitle"
+                    v-text="messages.message"
                   ></v-list-item-subtitle>
                 </v-list-item-content>
 
                 <v-list-item-action>
                   <v-list-item-action-text
-                    v-text="item.action"
+                    v-text="messages.timestamp"
                   ></v-list-item-action-text>
                   <v-icon v-if="!active" color="grey lighten-1">
                     star_border
@@ -50,17 +50,23 @@
                   <v-icon v-else color="yellow"> star </v-icon>
                 </v-list-item-action>
               </template>
+              <v-divider></v-divider>
             </v-list-item>
 
-            <v-divider v-if="index + 1 < items.length" :key="index"></v-divider>
+            <!-- <v-divider v-if="index + 1 < items.length" :key="index"></v-divider> -->
           </template>
-          <div>
-          <li v-for="message in getMessages" :key="message.id">
+          <div v-if="isAdminUser">
+          <li v-for="message in getMessages" :key="message.id" >
             Name: {{ message.name }} |
             Subject: {{ message.subject }}|
             Email: {{ message.email }} |  
             Message: {{ message.message }}|
             </li></div>
+            <div v-else>
+              <li>
+                You do not have permission to perform this action.
+              </li>
+            </div>
         </v-list-item-group>
       </v-list>
     </v-card>
@@ -94,10 +100,11 @@ export default {
     console.log("messages mounted");
   },
   computed: {
-  ...mapGetters(["getMessages"]),    
+  ...mapGetters(["getMessages", "isAdminUser"]),    
   },
   methods: {
     fetchingMessages() {
+      // this.getMessages  
       // let token = localStorage.getItem('token')
       console.log(this.token)
       this.$store.dispatch('fetchMessages')

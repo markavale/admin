@@ -16,6 +16,16 @@ const routes = [{
         }
     },
     {
+        path: '/dashboard',
+        name: 'dashboard',
+        component: () =>
+            import ( /* webpackChunkName: "dashboard" */ '../views/Dashboard.vue'),
+        meta: {
+            requiresAuth: true
+        }
+
+    },
+    {
         path: '/about',
         name: 'about',
         component: () =>
@@ -30,6 +40,16 @@ const routes = [{
         name: 'messages',
         component: () =>
             import ( /* webpackChunkName: "messages" */ '../views/portfolio/Messages.vue'),
+        meta: {
+            requiresAuth: true
+        }
+
+    },
+    {
+        path: '/inbox',
+        name: 'inbox',
+        component: () =>
+            import ( /* webpackChunkName: "inbox" */ '../views/portfolio/Inbox.vue'),
         meta: {
             requiresAuth: true
         }

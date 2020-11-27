@@ -33,12 +33,7 @@ const actions = {
     fetchMessages: (context) => {
         return new Promise((resolve, reject) => {
             getAPI
-              .get("api/messages/", {
-                headers: {
-                  "Content-Type": "application/x-www-form-urlencoded",
-                  Authorization: `Token ${localStorage.getItem("token")}`,
-                },
-              })
+              .get("api/messages/")
                 .then((res) => {
                     console.log(res.data)
                     resolve(true)

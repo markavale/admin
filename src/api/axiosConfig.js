@@ -1,9 +1,9 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 // import { state } from '@/store/modules/user'
-// const APIUrlProduction = 'https://markanthonyvale.herokuapp.com/'
-const APIUrlDevelopment = 'http://localhost:8000/'
-const APIUrl = APIUrlDevelopment
+const APIUrlProduction = 'https://markanthonyvale.herokuapp.com/'
+// const APIUrlDevelopment = 'http://localhost:8000/'
+const APIUrl = APIUrlProduction
 
 // axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -25,8 +25,7 @@ const getAPI = axios.create({
     baseURL: APIUrl,
     headers: {
         'Content-Type': 'application/json',
-        // 'X-CSRFToken': Cookies.get('csrftoken')
-        // 'Authentication': `Token ${token_data}`
+        Authorization: `Token ${localStorage.getItem('token')}`,
     }
 })
 

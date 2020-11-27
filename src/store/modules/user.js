@@ -13,6 +13,9 @@ const getters = {
   isAuthenticated(state) {
     return state.token != null;
   },
+  isAdminUser(state) {
+    return state.user.admin != false
+  },
   getAccessToken: (state) => state.token,
   requestUser: (state) => state.user,
 };

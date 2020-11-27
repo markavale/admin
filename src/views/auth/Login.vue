@@ -109,7 +109,7 @@ export default {
         .then(() => {
           console.log(this.$store.getters.isAuthenticated);
           this.loading = false;
-          this.$router.push({ name: "home" });
+          this.$router.push({ name: "dashboard" });
         })
         .catch((err) => {
           this.errors = [];
